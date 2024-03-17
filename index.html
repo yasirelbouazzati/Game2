@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAVE and RECYCLE</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="shortcut icon"
+      href="./imagenes/favicon.png"
+      type="image/x-icon"
+    />
+
+    <style>
+   
+   
+
+      #container {
+        text-align: right;
+        margin-top: -620px; /* Ajusta según sea necesario */
+        margin-left: 1420px;
+      }
+
+      #musicList {
+        float: right;
+        margin-top: 10px; /* Ajusta según sea necesario */
+      }
+
+      #audioPlayer {
+        width: 200px; /* Ajusta según sea necesario */
+        opacity: 0%;
+      }
+      .p {
+        opacity: 0%;
+      }
+    </style>
+  </head>
+
+  <body class="fondo">
+   
+    <main>
+      <div><img class="title--text" src="imagenes/titulo.png" /></div>
+      <div><img class="title--text" src="imagenes/titulo(1).png" /></div>
+      <a href="niveles.html"
+        ><div class="play">
+          <img class="play--btn" src="imagenes/play.png" /></div
+      ></a>
+
+      <div id="container">
+      
+        <div id="musicList">
+         
+          <img
+            id="musicButton"
+            src="imagenes/boton-musica-cerrado.png"
+            alt="Reproducir"
+            onclick="togglePlayPause()"
+            style="cursor: pointer; width: 80px"
+          />
+        </div>
+
+        <audio class="player" id="audioPlayer"></audio>
+      </div>
+
+      <audio id="playAudio" src="sonidos/play.mp3"></audio>
+    </main>
+
+    <script src="https://unpkg.com/howler@2.2.3/dist/howler.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const playButton = document.querySelector(".play--btn");
+
+        playButton.addEventListener("mouseenter", function () {
+          playButton.src = "imagenes/play_hover.png";
+        });
+
+        playButton.addEventListener("mouseleave", function () {
+          playButton.src = "imagenes/play.png";
+        });
+      });
+    </script>
+
+    <script>
+      var audioPlayer = new Howl({
+        src: ["sonidos/musica.mp3"], // Coloca la ruta correcta de tu archivo de audio
+        volume: 1.0,
+        html5: true,
+        autoplay: false,
+        loop: false,
+        onend: function () {
+          // Callback cuando la reproducción termina
+        },
+      });
+
+      var musicButton = document.getElementById("musicButton");
+      var isPlaying = false;
+
+      function togglePlayPause() {
+        if (isPlaying) {
+          audioPlayer.stop();
+          musicButton.src = "imagenes/boton-musica-cerrado.png";
+        } else {
+          audioPlayer.play();
+          musicButton.src = "imagenes/boton-musica.png";
+        }
+        isPlaying = !isPlaying;
+      }
+
+      function toggleMusicList() {
+        var musicList = document.getElementById("musicList");
+        musicList.style.display =
+          musicList.style.display === "block" ? "none" : "block";
+      }
+    </script>
+  </body>
+</html>
